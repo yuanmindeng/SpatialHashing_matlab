@@ -29,7 +29,10 @@ classdef SpatialHashing
             sh.hashtable = zeros(floor(length*width*height),1);
             % put each point into its bucket
             for i=1:size(points,1)
-                index = floor((points(i,1)-Xmin)*sh.conversion_factor)+floor((points(i,2)-Ymin)*width*sh.conversion_factor)+floor((points(i,3)-Zmin)*height*sh.conversion_factor)+1;
+                Xposition = floor((points(i,1)-Xmin)*sh.conversion_factor);
+                Yposition = floor((points(i,2)-Xmin)*sh.conversion_factor);
+                Zposition = floor((points(i,3)-Xmin)*sh.conversion_factor);
+                index = Zposition*length*width+Yposition*length+Xposition;
                 sh.hashtable(index,1) =i;
             end
                 
